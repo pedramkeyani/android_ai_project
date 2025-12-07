@@ -1,0 +1,26 @@
+package com.example.stylesnapai
+
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.stylesnapai.data.model.CustomStyle
+import com.example.stylesnapai.data.repository.LibraryRepository
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
+
+class SettingsViewModel(application: Application) : AndroidViewModel(application) {
+    private val repository = LibraryRepository(application)
+
+    val customStyles: StateFlow<List<CustomStyle>> = repository.getCustomStyles()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
+    fun addStyle(name: String, prompt: String) {
+        viewModelScope.launch { repository.saveStyle(name, prompt) }
+    }
+
+    fun deleteStyle(style: CustomStyle) {
+        viewModelScope.launch { repository.deleteStyle(style) }
+    }
+}
