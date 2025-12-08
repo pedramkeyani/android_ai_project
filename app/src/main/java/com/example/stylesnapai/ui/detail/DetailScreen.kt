@@ -11,6 +11,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
@@ -18,7 +19,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.stylesnapai.LibraryViewModel
-import com.example.stylesnapai.data.local.LibraryImageEntity
+import com.example.stylesnapai.model.SavedImage
 
 @Composable
 fun DetailScreen(
@@ -26,11 +27,11 @@ fun DetailScreen(
     uri: String,
     label: String,
     libraryViewModel: LibraryViewModel,
-    originalUri: String?
+    originalUri: String?,
 ) {
     val context = LocalContext.current
     val library by libraryViewModel.library.collectAsStateWithLifecycle()
-    val entry: LibraryImageEntity? = library.find { it.fileUri == uri }
+    val entry: SavedImage? = library.find { it.uri.toString() == uri }
     val bitmap = rememberAsyncImageBitmap(uri)
 
     Column(modifier = Modifier.padding(16.dp)) {

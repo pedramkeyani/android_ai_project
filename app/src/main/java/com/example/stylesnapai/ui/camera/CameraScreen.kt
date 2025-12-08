@@ -36,17 +36,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.example.stylesnapai.CameraViewModel
 import com.example.stylesnapai.navigation.NavRoutes
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
-import kotlinx.coroutines.launch
 import java.io.File
 import java.util.concurrent.Executor
 
@@ -75,8 +74,8 @@ fun CameraScreen(
         permissionsState.launchMultiplePermissionRequest()
     }
 
-    LaunchedEffect(uiState.generatedImages) {
-        if (uiState.generatedImages.isNotEmpty()) {
+    LaunchedEffect(uiState.latestResult) {
+        if (uiState.latestResult != null) {
             navController.navigate(NavRoutes.RESULTS)
         }
     }

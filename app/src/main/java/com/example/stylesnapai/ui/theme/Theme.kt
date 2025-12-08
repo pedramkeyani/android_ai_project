@@ -21,6 +21,8 @@ private val DarkColorScheme = darkColorScheme(
     surface = DeepBlue
 )
 
+private val ColorWhite = androidx.compose.ui.graphics.Color(0xFFFFFFFF)
+
 private val LightColorScheme = lightColorScheme(
     primary = Purple40,
     secondary = NeonPink,
@@ -28,8 +30,6 @@ private val LightColorScheme = lightColorScheme(
     background = ColorWhite,
     surface = ColorWhite
 )
-
-private val ColorWhite = androidx.compose.ui.graphics.Color(0xFFFFFFFF)
 
 @Composable
 fun StyleSnapTheme(
