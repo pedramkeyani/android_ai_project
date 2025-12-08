@@ -46,13 +46,17 @@ fun LibraryScreen(navController: NavController, viewModel: LibraryViewModel) {
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 items(images) { item ->
-                    LibraryItem(item, onOpen = {
-                        navController.navigate(
-                            "${Screen.Detail.route}?uri=${java.net.URLEncoder.encode(item.uri.toString(), "UTF-8")}&label=${java.net.URLEncoder.encode(item.styleLabel, "UTF-8")}&id=${item.id}&original=${java.net.URLEncoder.encode(item.originalUri?.toString() ?: "", "UTF-8")}" )
-                        )
-                    }, onDelete = {
-                        viewModel.delete(item)
-                    })
+                    LibraryItem(
+                        item,
+                        onOpen = {
+                            navController.navigate(
+                                "${Screen.Detail.route}?uri=${java.net.URLEncoder.encode(item.uri.toString(), "UTF-8")}&label=${java.net.URLEncoder.encode(item.styleLabel, "UTF-8")}&id=${item.id}&original=${java.net.URLEncoder.encode(item.originalUri?.toString() ?: "", "UTF-8")}"
+                            )
+                        },
+                        onDelete = {
+                            viewModel.delete(item)
+                        }
+                    )
                 }
             }
         }
